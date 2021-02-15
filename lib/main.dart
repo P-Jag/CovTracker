@@ -1,3 +1,5 @@
+import 'package:cov_19/app/services/api.dart';
+import 'package:cov_19/app/services/api_service.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -28,11 +30,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  String _accessToken = "";
 
-  void _incrementCounter() {
+  void _updateToken() async {
+    final apiService = APIService(API.sandbox());
+    final accessToken = await apiService.getAccessToken();
     setState(() {
-      _counter++;
+      _accessToken = accessToken;
     });
   }
 
@@ -50,16 +54,16 @@ class _MyHomePageState extends State<MyHomePage> {
               'You have pushed the button this many times:',
             ),
             Text(
-              '$_counter',
+              '$_accessToken',
               style: Theme.of(context).textTheme.headline4,
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+        onPressed: _updateToken,
+        tooltip: 'Check token',
+        child: Icon(Icons.question_answer),
       ),
     );
   }
