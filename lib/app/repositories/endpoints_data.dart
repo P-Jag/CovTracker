@@ -11,6 +11,8 @@ class EndpointsData {
   int get deaths => values[Endpoint.deaths];
   int get recovered => values[Endpoint.recovered];
 
+  ///
+
   @override
   String toString() =>
       'cases: $cases, casesSuspected: $casesSuspected, casesConfirmed: $casesConfirmed, deaths: $deaths, recovered: $recovered';
